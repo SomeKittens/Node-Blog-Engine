@@ -13,10 +13,14 @@ angular.module('commonality', [])
       results: []
     };
 
-    $rootScope.$watch('common.sourceText', function(n) {
-        var words = n.value.toLowerCase().split(/\s/).filter(function(a) {return a.length > 2;})
-        , wordMap = {}
-        , i, l;
+    $rootScope.$watch(function() {
+        return common.sourceText;
+      }, function(n) {
+      if (!n) { return; }
+
+      var words = n.toLowerCase().split(/\s/).filter(function(a) {return a.length > 2;})
+      , wordMap = {}
+      , i, l;
 
       for (i = 0, l = words.length; i < l; i++) {
         var currentWord = words[i];
@@ -44,22 +48,22 @@ angular.module('commonality', [])
   })
   .directive('commonalitySource', function(commonalityCalc) {
     return {
-      template: '<textarea ng-model="sourceText"></textarea>',
+      template: '<textarea ng-model="common.sourceText" class="form-control"></textarea>',
+      replace: true,
       link: function(scope) {
-        scope = commonalityCalc;
+        scope.common = commonalityCalc;
       }
     };
   })
   .directive('commonalityResults', function(commonalityCalc) {
     return {
-      template: '<tbody>' +
-                  '<tr ng-repeat="word in words">' +
-                    '<td>{{ word[0] }}</td>' +
-                    '<td>{{ word[1] }}</td>' +
-                  '</tr>' +
-                '</tbody>',
+      template: '<tr ng-repeat="word in common.results">' +
+                  '<td>{{ word[0] }}</td>' +
+                  '<td>{{ word[1] }}</td>' +
+                '</tr>',
+      transclude: true,
       link: function(scope) {
-        scope.words = commonalityCalc.results;
+        scope.common = commonalityCalc;
       }
     };
   });

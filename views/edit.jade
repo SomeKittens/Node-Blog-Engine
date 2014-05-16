@@ -4,7 +4,7 @@ block content
   .content(ng-controller='Editor')
     .row
       .col-md-6
-        //commonality-source
+        div(commonality-source)
       .col-md-6
         //
            Markdown results
@@ -14,7 +14,7 @@ block content
         //
            Word commonality
         table
-          th
+          thead
             td Word
             td Uses
-          tbody#commonality
+          tbody#commonality(commonality-results)
