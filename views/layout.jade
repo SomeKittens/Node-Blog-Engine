@@ -1,10 +1,17 @@
 doctype html
-html
+html(ng-app='nbe')
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet'  href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
   body
     block content
-    script(src='//code.jquery.com/jquery-2.1.1.min.js')
-    script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
+
+    // Libraries
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')
+    script(src='/lib/angular-route.js')
+    script(src='/lib/ngCommonality.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js')
+
+    // NBE code
+    script(src='/js/ng.js')
