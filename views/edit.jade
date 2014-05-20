@@ -3,17 +3,15 @@ extends layout
 block content
   .content(ng-controller='Editor')
     .row
+      textarea.form-control.col-md-6(ng-model='article.content')
       .col-md-6
-        div(commonality-source)
-      .col-md-6
-        //
-           Markdown results
+        div(marked='article.content')
     hr
     .row
       .col-md-4
         //
            Word commonality
-        table
+        table.table
           thead
             td Word
             td Uses
