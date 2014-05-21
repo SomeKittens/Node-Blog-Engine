@@ -10,11 +10,14 @@ angular.module('nbe', [
 }])
 .controller('Editor', function($scope, commonalityCalc) {
   $scope.article = {
-    content: ''
+    content: '',
+    wordCount: 0
   };
   
   $scope.$watch('article.content', function(n) {
     commonalityCalc.sourceText = $scope.article.content;
+    var temp = n.split(' ').filter(Boolean);
+    $scope.article.wordCount = temp.length;
   });
 
   console.log(commonalityCalc);
