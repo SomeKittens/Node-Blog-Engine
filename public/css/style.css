@@ -1,0 +1,15 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00b7ff; }
+
+.content .form-control {
+  width: 50%; }
+.content input {
+  margin: 5px 0; }
+.content textarea {
+  min-height: 400px; }
+.content h3 {
+  margin-top: 0; }

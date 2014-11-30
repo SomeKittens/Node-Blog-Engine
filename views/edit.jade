@@ -3,6 +3,9 @@ extends layout
 block content
   .content(ng-controller='Editor')
     .row
+      input.form-control.col-md-6(ng-model='article.title')
+      h3.col-md-6 {{ article.title }}
+    .row
       textarea.form-control.col-md-6(ng-model='article.content')
       .col-md-6
         div(marked='article.content')
