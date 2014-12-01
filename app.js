@@ -22,6 +22,8 @@ db.init(config.db.connString).catch(function() {
 });
 
 // view engine setup
+app.locals.author = config.author;
+app.locals.blogName = config.blogName;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 

@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1= locals.blogName
+  h2= locals.author
+  for article in articles
+    h3= article.title
+    div= article.content
