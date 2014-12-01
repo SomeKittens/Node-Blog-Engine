@@ -5,8 +5,6 @@ body {
 a {
   color: #00b7ff; }
 
-.content .form-control {
-  width: 50%; }
 .content input {
   margin: 5px 0; }
 .content textarea {

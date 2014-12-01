@@ -1,25 +1,32 @@
 extends layout
 
+block vars
+  script.
+    var article = JSON.parse('!{JSON.stringify(article)}');
+
 block content
-  .content(ng-controller='Editor')
-    .row
+  h1 Edit Article
+  .content.row(ng-controller='Editor')
+    .col-md-6
       input.form-control.col-md-6(ng-model='article.title')
-      h3.col-md-6 {{ article.title }}
-    .row
       textarea.form-control.col-md-6(ng-model='article.content')
-      .col-md-6
-        div(marked='article.content')
-    hr
-    .row
-      .col-md-4
-        //
-           Word commonality
-        table.table
-          thead
-            td Word
-            td Uses
-          tbody#commonality(commonality-results)
-      .col-md-4
-        h4 Word Count
-        div
-          | {{ article.wordCount | number }}
+      hr
+      .row
+        .col-md-3
+          //
+             Word commonality
+          table.table
+            thead
+              td Word
+              td Uses
+            tbody#commonality(commonality-results)
+        .col-md-3
+          h4 Word Count
+          span
+            | {{ article.wordCount | number }}
+      hr
+      .row
+        button.btn.btn-success.pull-right(ng-click="save()") Save
+    .col-md-6
+      h3 {{ article.title }}
+      div(marked='article.content')

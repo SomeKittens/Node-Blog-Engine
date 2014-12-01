@@ -6,7 +6,8 @@ var express = require('express')
   , bodyParser = require('body-parser');
 
 var routes = require('./routes/index')
-  , author = require('./routes/author');
+  , author = require('./routes/author')
+  , posts = require('./routes/posts');
 
 var config = require('./config');
 
@@ -24,15 +25,16 @@ db.init(config.db.connString).catch(function() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 
 app.use('/', routes);
 app.use('/author', author);
+app.use('/posts', posts);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

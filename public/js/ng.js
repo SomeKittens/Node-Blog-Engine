@@ -8,17 +8,23 @@ angular.module('nbe', [
   // Oddly, not the default, and is needed to tell express it's XHR
   $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }])
-.controller('Editor', function($scope, commonalityCalc) {
-  $scope.article = {
-    content: '',
-    wordCount: 0
-  };
-  
+.controller('Editor', function($scope, $http, commonalityCalc) {
+  $scope.article = article;
+
   $scope.$watch('article.content', function(n) {
+    if (!n) { return; }
     commonalityCalc.sourceText = $scope.article.content;
     var temp = n.split(' ').filter(Boolean);
     $scope.article.wordCount = temp.length;
   });
 
-  console.log(commonalityCalc);
+  $scope.save = function() {
+    $http({
+      method: 'patch',
+      url: '/posts/' + article.id,
+      data: $scope.article
+    }).success(function() {
+      // TODO indicate successful save
+    });
+  };
 });

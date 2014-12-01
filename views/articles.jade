@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 list of articles
+  for article in articles
+    | #{article.id}
+    | #{article.title}
+    br
+  form(
+    action = '/posts'
+    method = 'post'
+  )
+    button.btn.btn-success(type = 'submit') Create new article
