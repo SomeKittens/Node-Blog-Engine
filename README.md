@@ -2,11 +2,19 @@ Node Blog Engine is my second attempt at writing a blog engine in Node.js.  This
 
 Road Map
 
- - Create a halfway-decent post editor
-   - Real-time Markdown (done)
-   - Word usage analyzer ( https://github.com/SomeKittens/commonality ) (done)
-   - Suggest alternate words/phrases
- - Create a simple ORM to save the articles to some DB
- - Create a rendering engine that creates `.html` files from saved
- - Some way to actually display the articles?
- - Tag system
+0.1.0
+ - [ ] Allow admin to login, and CRUD articles
+ - [ ] Front page and article views
+ - [ ] Some not-terrible design
+ - [x] Create a simple ORM to save the articles to some DB (https://github.com/SomeKittens/nbe-postgres)
+
+0.2.0
+ - [ ] Editor
+   - [ ] More statistics for post editor
+   - [ ] Suggest alternate words/phrases
+
+0.3.0
+ - [ ] Rendering engine
+
+0.4.0
+ - [ ] Tag system
