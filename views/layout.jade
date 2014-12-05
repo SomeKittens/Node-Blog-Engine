@@ -7,6 +7,15 @@ html(ng-app='nbe')
     //- Used for rendering vars to the page
     block vars
   body
+    .navbar.navbar-default
+      .container
+        .navbar-header
+          a.navbar-brand= locals.blogName
+          ul.navbar-nav.nav
+            li
+              a(href='/') home
+            li
+              a(href='/posts') login
     block content
 
     // Libraries
