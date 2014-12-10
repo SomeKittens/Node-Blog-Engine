@@ -1,21 +1,22 @@
 doctype html
 html(ng-app='nbe')
   head
-    title= title
+    title= blogName
     link(rel='stylesheet'  href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/style.css')
+    link(rel='shortcut icon', href='/images/rk.jpg', type='image/x-icon')
     //- Used for rendering vars to the page
     block vars
   body
-    .navbar.navbar-default
-      .container
-        .navbar-header
-          a.navbar-brand= locals.blogName
-          ul.navbar-nav.nav
-            li
-              a(href='/') home
-            li
-              a(href='/posts') login
+    .container
+      .title
+        .middle-title
+          .inner-title
+            h1= author
+    .menu
+      a(href='/') Home
+      a(href='/contact') Contact Me
+      a(href='http://github.com/SomeKittens') GitHub
     block content
 
     // Libraries

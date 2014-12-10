@@ -12,4 +12,12 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/articles/:id', function(req, res) {
+  db.getArticle(req.params.id).then(function(article) {
+    return res.render('article', {
+      article: article
+    });
+  });
+});
+
 module.exports = router;
