@@ -5,28 +5,29 @@ block vars
     var article = JSON.parse('!{JSON.stringify(article)}');
 
 block content
-  h1 Edit Article
-  .content.row(ng-controller='Editor')
-    .col-md-6
-      input.form-control.col-md-6(ng-model='article.title')
-      textarea.form-control.col-md-6(ng-model='article.content')
-      hr
-      .row
-        .col-md-3
-          //
-             Word commonality
-          table.table
-            thead
-              td Word
-              td Uses
-            tbody#commonality(commonality-results)
-        .col-md-3
-          h4 Word Count
-          span
-            | {{ article.wordCount | number }}
-      hr
-      .row
-        button.btn.btn-success.pull-right(ng-click="save()") Save
-    .col-md-6
-      h3 {{ article.title }}
-      div(marked='article.content')
+  .container
+    h1 Edit Article
+    .content.row(ng-controller='Editor')
+      .six.columns
+        input.form-control.u-full-width(type='text', placeholder='Title', ng-model='article.title')
+        textarea.form-control.u-full-width(placeholder='Body', ng-model='article.content')
+        hr
+        .row
+          .six.columns
+            //
+               Word commonality
+            table.table
+              thead
+                td Word
+                td Uses
+              tbody#commonality(commonality-results)
+          .six.columns
+            h4 Word Count
+            span
+              | {{ article.wordCount | number }}
+        hr
+        .row
+          button.btn.btn-success.pull-right(ng-click="save()") Save
+      .six.columns
+        h3 {{ article.title }}
+        div(marked='article.content')

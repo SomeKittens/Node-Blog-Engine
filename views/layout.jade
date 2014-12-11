@@ -2,13 +2,14 @@ doctype html
 html(ng-app='nbe')
   head
     title= blogName
-    link(rel='stylesheet'  href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/normalize.css')
+    link(rel='stylesheet', href='/css/skeleton.css')
     link(rel='stylesheet', href='/css/style.css')
     link(rel='shortcut icon', href='/images/rk.jpg', type='image/x-icon')
     //- Used for rendering vars to the page
     block vars
   body
-    .container
+    header
       .title
         .middle-title
           .inner-title
