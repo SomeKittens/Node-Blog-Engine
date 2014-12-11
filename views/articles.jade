@@ -3,10 +3,18 @@ extends layout
 block content
   .container
     h1 list of articles
-    for article in articles
-      | #{article.id}
-      | #{article.title}
-      br
+    table.u-full-width
+      thead
+        tr
+          th id
+          th Title
+      tbody
+        for article in articles
+          tr
+            td #{article.id}
+            td #{article.title || '(none)'}
+            td
+              a(href='/posts/edit/#{article.id}') Edit
     form(
       action = '/posts'
       method = 'post'
