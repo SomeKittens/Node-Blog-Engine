@@ -1,0 +1,11 @@
+This project wouldn't be possible without:
+
+postgres
+Node.js
+express
+Jade
+
+Git
+
+Skeleton
+Angular.js
