@@ -1,13 +1,23 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+  , router = express.Router();
+
+var reqIs = require('req-is');
 
 var db = require('nbe-' + require('../config').db.type);
 
-router.get('/', function(req, res) {
+router.all('*', reqIs.user);
+
+router.route('/')
+.get(function(req, res) {
   db.getAllArticles().then(function(articles) {
     return res.render('articles', {
       articles: articles
     });
+  });
+})
+.post(function(req, res) {
+  db.createArticle().then(function(id) {
+    return res.redirect('/posts/edit/' + id);
   });
 });
 
@@ -19,12 +29,6 @@ router.get('/edit/:id', function(req, res) {
       });
     }
     return next();
-  });
-});
-
-router.post('/', function(req, res) {
-  db.createArticle().then(function(id) {
-    return res.redirect('/posts/edit/' + id);
   });
 });
 

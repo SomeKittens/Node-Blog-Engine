@@ -3,11 +3,14 @@ var express = require('express')
   , favicon = require('static-favicon')
   , logger = require('morgan')
   , cookieParser = require('cookie-parser')
-  , bodyParser = require('body-parser');
+  , bodyParser = require('body-parser')
+  , session = require('express-session')
+  , flash = require('express-flash');
 
 var routes = require('./routes/index')
   , author = require('./routes/author')
-  , posts = require('./routes/posts');
+  , posts = require('./routes/posts')
+  , login = require('./routes/login');
 
 var config = require('./config');
 
@@ -21,6 +24,8 @@ db.init(config.db.connString).catch(function() {
   process.exit(1);
 });
 
+var passport = require('passport');
+
 // view engine setup
 app.locals.author = config.author;
 app.locals.blogName = config.blogName;
@@ -33,10 +38,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(session({
+  secret: config.secret,
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 app.use('/', routes);
 app.use('/author', author);
 app.use('/posts', posts);
+app.use('/login', login);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
