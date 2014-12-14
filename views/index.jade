@@ -1,8 +1,8 @@
 extends layout
 
 block content
-  h1= locals.blogName
-  h2= locals.author
-  for article in articles
-    h3= article.title
-    div= article.content
+  .container.body
+    for article in articles
+      h3.heading
+        a(href='/articles/#{article.id}')= article.title
+      div= article.content

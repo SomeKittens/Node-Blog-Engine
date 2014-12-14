@@ -5,8 +5,8 @@ Node Blog Engine is my second attempt at writing a blog engine in Node.js.  This
 Road Map
 
 0.1.0
- - [ ] Allow admin to login, and CRUD articles
- - [ ] Front page and article views
+ - [x] Allow admin to login, and CRUD articles
+ - [x] Front page and article views
  - [x] Some not-terrible design
  - [x] Create a simple ORM to save the articles to some DB (https://github.com/SomeKittens/nbe-postgres)
 

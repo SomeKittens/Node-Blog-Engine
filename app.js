@@ -16,7 +16,7 @@ var config = require('./config');
 
 var app = express();
 
-var db = require('nbe-' + config.db.type);
+var db = require('./db');
 
 db.init(config.db.connString).catch(function() {
   console.log(arguments);

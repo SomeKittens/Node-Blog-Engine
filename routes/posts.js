@@ -3,7 +3,7 @@ var express = require('express')
 
 var reqIs = require('req-is');
 
-var db = require('nbe-' + require('../config').db.type);
+var db = require('../db');
 
 router.all('*', reqIs.user);
 

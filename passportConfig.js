@@ -4,7 +4,7 @@ var passport = require('passport')
   , bcrypt = bluebird.promisifyAll(require('bcrypt'));
 
 var config = require('./config')
-  , db = require('nbe-' + config.db.type);
+  , db = require('./db');
 
 passport.use('local-login', new LocalStrategy(
   function(username, password, done) {
@@ -13,7 +13,6 @@ passport.use('local-login', new LocalStrategy(
         throw new Error('Incorrect username');
       }
       this.user = user;
-      console.log(password, user.passwordhash);
       return bcrypt.compareAsync(password, user.passwordhash);
     })
     .then(function(correctPassword) {
@@ -56,7 +55,6 @@ passport.use('local-create', new LocalStrategy(
 }));
 
 passport.serializeUser(function(user, done) {
-  console.log(user);
   done(null, user.id);
 });
 
