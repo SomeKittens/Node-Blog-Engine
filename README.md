@@ -14,9 +14,10 @@ Road Map
  - [ ] Editor
    - [ ] More statistics for post editor
    - [ ] Suggest alternate words/phrases
-
+ - [ ] Login
+   - [ ] Restrict users from creating new accounts
 0.3.0
- - [ ] Rendering engine
+ - [ ] Tag system
 
 0.4.0
- - [ ] Tag system
+ - [ ] Rendering engine
