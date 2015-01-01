@@ -14,10 +14,13 @@ Road Map
  - [ ] Editor
    - [ ] More statistics for post editor
    - [ ] Suggest alternate words/phrases
+   - [ ] Article display actually needs to display Markdown
  - [ ] Login
    - [ ] Restrict users from creating new accounts
+
 0.3.0
  - [ ] Tag system
+ - [ ] Superuser setup
 
 0.4.0
  - [ ] Rendering engine

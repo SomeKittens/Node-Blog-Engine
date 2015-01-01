@@ -2,6 +2,10 @@ doctype html
 html(ng-app='nbe')
   head
     title= blogName
+    link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/grupo3' type='text/css')
+    link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/selena' type='text/css')
+    link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/news-cycle' type='text/css')
+    link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/freeuniversal' type='text/css')
     link(rel='stylesheet', href='/css/normalize.css')
     link(rel='stylesheet', href='/css/skeleton.css')
     link(rel='stylesheet', href='/css/style.css')
@@ -14,11 +18,22 @@ html(ng-app='nbe')
         .middle-title
           .inner-title
             h1= author
-            .menu
-              a(href='/') Home
-              a(href='/contact') Contact Me
-              a(href='http://github.com/SomeKittens') GitHub
+            nav
+              ul
+                li
+                  a(href='/')
+                    span Home
+                li
+                  a(href='/contact')
+                    span Contact Me
+                li
+                  a(href='http://github.com/SomeKittens')
+                    span GitHub
     block content
+
+    footer
+      | &copy; 2015 Randall Koutnik | 
+      a(href='https://github.com/SomeKittens/Node-Blog-Engine') View Source
 
     // Libraries
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js')

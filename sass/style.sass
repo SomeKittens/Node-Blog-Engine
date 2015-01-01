@@ -1,4 +1,4 @@
-$primary-background: #425B60
+@import '_vars'
 
 a
   color: #00B7FF
@@ -20,7 +20,7 @@ body
   font-family: 'NewsCycleRegular'
   font-weight: normal
   font-style: normal
-  padding: 50px
+  padding: 40px 50px 50px 50px
 
 header
   width: 80%
@@ -32,8 +32,31 @@ header
   z-index: 2
   box-shadow: 10px 10px 0 #3F5459
   color: #f0f0f0
+  font-family: 'GRUPO3Regular'
   h1
-    text-transform: uppercase
+    letter-spacing: 0
+    font-size: $h1-font-size
+  nav
+    ul
+      width: 100%
+      margin-bottom: 1rem
+      li
+        display: inline-block
+        margin: 0 0.25rem
+        a
+          display: block
+          span
+            display: inline-block
+            vertical-align: middle
+            text-align: center
+            padding: 0.25rem 1rem 0
+            margin: 0 0.5rem
+            font-size: $h3-font-size
+            line-height: 40px
+            background-color: #5a7b82
+            color: #f0f0f0
+            &:hover
+              background-color: #6a8b92
 
 .inner-title
   width: 100%
@@ -43,37 +66,19 @@ header
   box-sizing: border-box
   text-align: center
 
-.menu
-  background-color: $primary-background
-  height: 40px
-  width: 80%
-  margin: auto
-  padding: 0 10px
-  text-align: center
-
-  a
-    display: inline-block
-    text-align: center
-    padding: 0 10px
-    margin: 0 6px
-    font-size: 1.2em
-    line-height: 40px
-    height: 100%
-    background-color: #5a7b82
-    text-decoration: none
-    color: #f0f0f0
-
 .body
   width: 80%
   margin: 10px auto
   background-color: #d7d8d9
   padding: 5px 10px 10px 10px
-  font-size: 16px
-  line-height: 1.4em
+  font-size: $base-font-size
+  line-height: $base-line-height
+  word-wrap: break-word
 
   .heading
     text-align: center
     a
+      font-size: $h3-font-size
       color: black
 
 footer
