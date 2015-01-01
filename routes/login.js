@@ -16,6 +16,7 @@ var authConfig = {
 
 router.post('/', passport.authenticate('local-login', authConfig));
 
-router.post('/create', passport.authenticate('local-create', authConfig));
+// Removing account creation for now
+// router.post('/create', passport.authenticate('local-create', authConfig));
 
 module.exports = router;

@@ -5,16 +5,18 @@ block content
     - if (messages.error && messages.error.length)
       span= messages.error[0]
 
-    .row
-      .six.columns
+    .row.login
+      .twelve.columns
         h3 Login
         form(method='post', action='/login')
           input(type='text', name='username', placeholder='username')
+          br
           input(type='password', name='password', placeholder='password')
+          br
           button(type='submit') Submit
-      .six.columns
-        h3 Create Account
-        form(method='post', action='/login/create')
-          input(type='text', name='username', placeholder='username')
-          input(type='password', name='password', placeholder='password')
-          button(type='submit') Submit
+      //- .six.columns
+      //-   h3 Create Account
+      //-   form(method='post', action='/login/create')
+      //-     input(type='text', name='username', placeholder='username')
+      //-     input(type='password', name='password', placeholder='password')
+      //-     button(type='submit') Submit

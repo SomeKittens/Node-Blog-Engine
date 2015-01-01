@@ -13,8 +13,10 @@ Road Map
 0.2.0
  - [ ] Editor
    - [ ] Article display actually needs to display Markdown
- - [ ] Login
-   - [ ] Restrict users from creating new accounts
+ - [x] Login
+   - [x] Restrict users from creating new accounts
+ - [ ] Nav
+   - [ ] Contact Page
 
 0.3.0
  - [ ] Tag system
