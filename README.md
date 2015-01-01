@@ -11,8 +11,8 @@ Road Map
  - [x] Create a simple ORM to save the articles to some DB (https://github.com/SomeKittens/nbe-postgres)
 
 0.2.0
- - [ ] Editor
-   - [ ] Article display actually needs to display Markdown
+ - [x] Editor
+   - [x] Article save actually needs to save as rendered Markdown
  - [x] Login
    - [x] Restrict users from creating new accounts
  - [ ] Nav

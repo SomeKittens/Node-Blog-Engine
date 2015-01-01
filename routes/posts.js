@@ -1,9 +1,15 @@
 var express = require('express')
+  , marked = require('marked')
   , router = express.Router();
 
 var reqIs = require('req-is');
 
 var db = require('../db');
+
+// Save user from themselves
+marked.setOptions({
+  sanitize: true
+});
 
 router.all('*', reqIs.user);
 
@@ -33,6 +39,7 @@ router.get('/edit/:id', function(req, res) {
 });
 
 router.patch('/:id', function(req, res) {
+  req.body.content = marked(req.body.content);
   db.saveArticle(req.body).then(function() {
     return res.send(204);
   });

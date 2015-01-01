@@ -5,4 +5,4 @@ block content
     for article in articles
       h3.heading
         a(href='/articles/#{article.id}')= article.title
-      div= article.content
+      div!= article.content
