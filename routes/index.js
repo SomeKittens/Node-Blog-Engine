@@ -20,4 +20,8 @@ router.get('/articles/:id', function(req, res) {
   });
 });
 
+router.get('/contact', function(req, res) {
+  return res.render('contact');
+});
+
 module.exports = router;
