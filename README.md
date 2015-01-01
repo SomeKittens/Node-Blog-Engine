@@ -12,8 +12,6 @@ Road Map
 
 0.2.0
  - [ ] Editor
-   - [ ] More statistics for post editor
-   - [ ] Suggest alternate words/phrases
    - [ ] Article display actually needs to display Markdown
  - [ ] Login
    - [ ] Restrict users from creating new accounts
@@ -21,6 +19,9 @@ Road Map
 0.3.0
  - [ ] Tag system
  - [ ] Superuser setup
+ - [ ] Editor
+   - [ ] More statistics for post editor
+   - [ ] Suggest alternate words/phrases
 
 0.4.0
  - [ ] Rendering engine
