@@ -15,8 +15,8 @@ Road Map
    - [x] Article save actually needs to save as rendered Markdown
  - [x] Login
    - [x] Restrict users from creating new accounts
- - [ ] Nav
-   - [ ] Contact Page
+ - [x] Nav
+   - [x] Contact Page
 
 0.3.0
  - [ ] Tag system
