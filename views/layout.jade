@@ -6,9 +6,7 @@ html(ng-app='nbe')
     link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/selena' type='text/css')
     link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/news-cycle' type='text/css')
     link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/freeuniversal' type='text/css')
-    link(rel='stylesheet', href='/css/normalize.css')
-    link(rel='stylesheet', href='/css/skeleton.css')
-    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/main.css')
     link(rel='shortcut icon', href='/images/rk.jpg', type='image/x-icon')
     //- Used for rendering JS vars to the page
     block vars
@@ -24,7 +22,7 @@ html(ng-app='nbe')
                   a(href='/')
                     span Home
                 li
-                  a(href='/contact')
+                  a(href='/contact.html')
                     span Contact Me
                 li
                   a(href='http://github.com/SomeKittens')
@@ -34,15 +32,11 @@ html(ng-app='nbe')
     footer
       | &copy; 2015 Randall Koutnik | 
       a(href='https://github.com/SomeKittens/Node-Blog-Engine') View Source
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    // Libraries
-    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js')
-    //- script(src='/lib/angular-route.js')
-    script(src='/lib/ngCommonality.js')
-    script(src='/lib/marked.js')
-    script(src='/lib/angular-marked.js')
-
-    //- script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js')
-
-    // NBE code
-    script(src='/js/ng.js')
+      ga('create', 'UA-59570836-1', 'auto');
+      ga('send', 'pageview');

@@ -4,5 +4,5 @@ block content
   .container.body
     for article in articles
       h3.heading
-        a(href='/articles/#{article.id}')= article.title
+        a(href='/articles/#{article.title}.html')= article.title
       div!= article.content
