@@ -8,8 +8,8 @@ angular.module('nbe', [
   // Oddly, not the default, and is needed to tell express it's XHR
   $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }])
-.controller('Editor', function($scope, $http, commonalityCalc) {
-  $scope.article = article;
+.controller('Editor', function($scope, $http, $window, commonalityCalc) {
+  $scope.article = $window.article;
 
   $scope.$watch('article.content', function(n) {
     if (!n) { return; }

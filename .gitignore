@@ -4,3 +4,4 @@ notes
 .sass-cache
 npm-debug.log
 results
+.env

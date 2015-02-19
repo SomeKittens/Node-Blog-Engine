@@ -1,9 +1,14 @@
+'use strict';
+
+require('dotenv').load();
+
 var express = require('express')
   , path = require('path')
   , logger = require('morgan')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
   , session = require('express-session')
+  , RedisStore = require('connect-redis')(session)
   , flash = require('express-flash');
 
 var routes = require('./routes/index')
@@ -37,10 +42,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(session({
-  secret: config.secret,
-  resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 }}));
+  store: new RedisStore(process.env.REDIS_URL),
+  secret: process.env.SESSION_SECRET
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
