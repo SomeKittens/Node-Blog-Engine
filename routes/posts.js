@@ -17,7 +17,8 @@ router.route('/')
 .get(function(req, res) {
   db.getAllArticles().then(function(articles) {
     return res.render('articles', {
-      articles: articles
+      articles: articles,
+      isAdmin: true
     });
   });
 })
@@ -31,7 +32,8 @@ router.get('/edit/:id', function(req, res) {
   db.getArticle(req.params.id).then(function(article) {
     if (article) {
       return res.render('edit', {
-        article: article
+        article: article,
+        isAdmin: true
       });
     }
     return next();
