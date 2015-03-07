@@ -2,7 +2,7 @@ extends layout
 
 block vars
   script.
-    var article = JSON.parse('!{JSON.stringify(article)}');
+    var article = !{JSON.stringify(article)};
 
 block content
   .container
