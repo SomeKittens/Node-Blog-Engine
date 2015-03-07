@@ -4,6 +4,7 @@ var bluebird = require('bluebird');
 var config = require('./config');
 var fs = bluebird.promisifyAll(require('fs-extra'));
 var rimraf = bluebird.promisify(require('rimraf'));
+var slug = require('slug');
 
 // Establish DB connection
 var db = require('./db');
@@ -45,17 +46,22 @@ rimraf('./results').then(function() {
     db.getAllArticles().then(function(articles) {
       if (articles) {
         bluebird.map(articles, function(article) {
+          article.slug = slug(article.title);
           return jade.renderFileAsync('./views/article.jade', {
             author: config.author,
             blogName: config.blogName,
             article: article
           }).then(function(html) {
-            return fs.writeFileAsync('./results/articles/' + article.title + '.html', html);
+            return fs.writeFileAsync('./results/articles/' + article.slug + '.html', html);
           });
         });
       }
     }),
     db.getFrontpage().then(function(frontpageArticles) {
+      frontpageArticles = frontpageArticles.map(function(article) {
+        article.slug = slug(article.title);
+        return article;
+      });
       return jade.renderFileAsync('./views/index.jade', {
         author: config.author,
         blogName: config.blogName,

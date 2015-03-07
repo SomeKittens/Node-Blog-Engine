@@ -2,7 +2,8 @@
   "name": "nbe",
   "version": "0.2.0",
   "scripts": {
-    "start": "DEBUG=nbe NODE_ENV=development nodemon ./bin/www"
+    "start": "DEBUG=nbe NODE_ENV=development nodemon ./bin/www",
+    "generate": "node generate.js"
   },
   "repository": {
     "type": "git",
