@@ -4,3 +4,6 @@ block content
   .body
     h1.heading= article.title
     | !{article.content}
+
+block vars
+  - var titleOverwrite = article.title;

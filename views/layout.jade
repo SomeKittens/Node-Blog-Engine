@@ -1,15 +1,16 @@
 doctype html
 html(ng-app='nbe')
   head
-    title= blogName
+    //- Used for rendering JS vars to the page
+    block vars
+    - var title = titleOverwrite ? titleOverwrite + ' ' + blogName : blogName;
+    title= title
     link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/grupo3' type='text/css')
     link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/selena' type='text/css')
     link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/news-cycle' type='text/css')
     link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/freeuniversal' type='text/css')
     link(rel='stylesheet', href='/css/main.css')
     link(rel='shortcut icon', href='/images/rk.jpg', type='image/x-icon')
-    //- Used for rendering JS vars to the page
-    block vars
   body
     header
       .title
