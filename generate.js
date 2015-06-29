@@ -9,8 +9,8 @@ var slug = require('slug');
 // Establish DB connection
 var db = require('./db');
 
-db.init(config.db.connString).catch(function() {
-  console.log(arguments);
+db.init(config.db.connString).catch(function(err) {
+  console.log(err);
   console.error('Database not installed or improperly initalized');
   process.exit(1);
 });
