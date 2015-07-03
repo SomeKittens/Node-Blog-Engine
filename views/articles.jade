@@ -1,7 +1,9 @@
 extends layout
 
 block content
-  .container
+  .container(
+    ng-controller='ArticlesController as AC'
+  )
     h1 list of articles
     table.u-full-width
       thead
@@ -9,12 +11,13 @@ block content
           th id
           th Title
       tbody
-        for article in articles
-          tr
-            td #{article.id}
-            td #{article.title || '(none)'}
-            td
-              a(href='/posts/edit/#{article.id}') Edit
+        tr(
+          ng-repeat='article in AC.articles'
+        )
+          td {{ article.id }}
+          td {{ article.title || '(none)' }}
+          td
+            a(ng-href='/edit/{{article.id}}') Edit
     form(
       action = '/posts'
       method = 'post'

@@ -8,23 +8,52 @@ angular.module('nbe', [
   // Oddly, not the default, and is needed to tell express it's XHR
   $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }])
-.controller('Editor', function($scope, $http, $window, commonalityCalc) {
-  $scope.article = $window.article;
+.controller('Editor', function($scope, $window, articles, commonalityCalc) {
+  var EC = this;
 
-  $scope.$watch('article.content', function(n) {
-    if (!n) { return; }
-    commonalityCalc.sourceText = $scope.article.content;
-    var temp = n.split(' ').filter(Boolean);
-    $scope.article.wordCount = temp.length;
+  // TODO: ui-router
+  articles.getArticle($window.location.pathname.split('/')[2])
+  .then(function (data) {
+    EC.article = data.data;
   });
 
-  $scope.save = function() {
-    $http({
-      method: 'patch',
-      url: '/posts/' + article.id,
-      data: $scope.article
-    }).success(function() {
+  $scope.$watch('EC.article.body', function(n) {
+    if (!n) { return; }
+    commonalityCalc.sourceText = EC.article.body;
+    EC.wordCount = n.split(' ').filter(Boolean).length;
+  });
+
+  EC.save = function() {
+    articles.save(EC.article)
+    .success(function() {
       // TODO indicate successful save
     });
   };
+})
+.controller('ArticlesController', function (articles) {
+  var AC = this;
+
+  articles.getAllArticles()
+  .then(function (data) {
+    AC.articles = data.data;
+  });
+
+})
+.factory('articles', function ($http) {
+  var actions = {
+    getAllArticles: function () {
+      return $http.get('/posts');
+    },
+    getArticle: function (id) {
+      return $http.get('/posts/' + id);
+    },
+    save: function (article) {
+      return $http({
+        method: 'patch',
+        url: '/posts/' + article.id,
+        data: article
+      });
+    }
+  };
+  return actions;
 });

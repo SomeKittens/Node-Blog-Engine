@@ -1,21 +1,23 @@
 extends layout
 
-block vars
-  script.
-    var article = !{JSON.stringify(article)};
-
 block content
   .container
     h1 Edit Article
-    .content.row(ng-controller='Editor')
+    .content.row(ng-controller='Editor as EC')
       .six.columns
-        input.form-control.u-full-width(type='text', placeholder='Title', ng-model='article.title')
-        textarea.form-control.u-full-width(placeholder='Body', ng-model='article.content')
+        input.form-control.u-full-width(
+          type='text'
+          placeholder='Title'
+          ng-model='EC.article.title'
+        )
+        textarea.form-control.u-full-width(
+          placeholder='Body'
+          ng-model='EC.article.body'
+        )
         hr
         .row
           .six.columns
-            //
-               Word commonality
+            // Word commonality
             table.table
               thead
                 td Word
@@ -24,10 +26,10 @@ block content
           .six.columns
             h4 Word Count
             span
-              | {{ article.wordCount | number }}
+              | {{ EC.wordCount | number }}
         hr
         .row
-          button.btn.btn-success.pull-right(ng-click="save()") Save
+          button.btn.btn-success.pull-right(ng-click='EC.save()') Save
       .six.columns
-        h3 {{ article.title }}
-        div(marked='article.content')
+        h3 {{ EC.article.title }}
+        div(marked='EC.article.body')

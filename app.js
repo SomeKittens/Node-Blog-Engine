@@ -11,24 +11,12 @@ var express = require('express')
   , RedisStore = require('connect-redis')(session)
   , flash = require('express-flash');
 
-var routes = require('./routes/index')
-  , author = require('./routes/author')
-  , posts = require('./routes/posts')
-  , login = require('./routes/login');
+var pages = require('./routes/pages')
+  , posts = require('./routes/posts');
 
 var config = require('./config');
 
 var app = express();
-
-var db = require('./db');
-
-db.init(config.db.connString).catch(function() {
-  console.log(arguments);
-  console.error('Database not installed or improperly initalized');
-  process.exit(1);
-});
-
-var passport = require('passport');
 
 // view engine setup
 app.locals.author = config.author;
@@ -45,14 +33,10 @@ app.use(session({
   store: new RedisStore(process.env.REDIS_URL),
   secret: process.env.SESSION_SECRET
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(flash());
 
-app.use('/', routes);
-app.use('/author', author);
+app.use('/', pages);
 app.use('/posts', posts);
-app.use('/login', login);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
