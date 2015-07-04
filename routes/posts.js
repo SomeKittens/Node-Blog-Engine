@@ -1,50 +1,33 @@
 var express = require('express')
-  , marked = require('marked')
+  , db = require('../db')
   , router = express.Router();
 
-var reqIs = require('req-is');
-
-var db = require('../db');
-
-// Save user from themselves
-marked.setOptions({
-  sanitize: true
-});
-
-router.all('*', reqIs.user);
+// API for interacting with posts
 
 router.route('/')
 .get(function(req, res) {
-  db.getAllArticles().then(function(articles) {
-    return res.render('articles', {
-      articles: articles,
-      isAdmin: true
-    });
-  });
+  return res.json(db.getAllArticles());
 })
 .post(function(req, res) {
-  db.createArticle().then(function(id) {
-    return res.redirect('/posts/edit/' + id);
-  });
+  var id = db.createArticle();
+  return res.redirect('/edit/' + id);
 });
 
-router.get('/edit/:id', function(req, res) {
-  db.getArticle(req.params.id).then(function(article) {
-    if (article) {
-      return res.render('edit', {
-        article: article,
-        isAdmin: true
-      });
+router.route('/:id')
+.get(function (req, res) {
+  return res.json(db.getArticle(req.params.id));
+})
+.patch(function (req, res) {
+  if (req.body.publishState !== undefined) {
+    try {
+      db.publish(req.params.id, req.body.publishState);
+    } catch (e) {
+      return res.send(400, e.message);
     }
-    return next();
-  });
-});
-
-router.patch('/:id', function(req, res) {
-  req.body.content = marked(req.body.content);
-  db.saveArticle(req.body).then(function() {
     return res.send(204);
-  });
+  }
+  db.saveArticle(req.body);
+  return res.send(204);
 });
 
 module.exports = router;

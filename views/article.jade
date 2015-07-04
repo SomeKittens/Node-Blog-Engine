@@ -3,7 +3,7 @@ extends layout
 block content
   .container.body
     h1.heading= article.title
-    | !{article.content}
+    | !{article.body}
 
 block vars
   - var titleOverwrite = article.title;

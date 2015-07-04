@@ -9,15 +9,9 @@ var slug = require('slug');
 // Establish DB connection
 var db = require('./db');
 
-db.init(config.db.connString).catch(function(err) {
-  console.log(err);
-  console.error('Database not installed or improperly initalized');
-  process.exit(1);
-});
-
 // Generate stuff
 //  - Jade
-//  - SASS
+//  - SASS (weird syntax, can't be promisified automagically)
 var sass = require('node-sass');
 var jade = bluebird.promisifyAll(require('jade'));
 
@@ -31,44 +25,36 @@ rimraf('./results').then(function() {
   ]);
 }).then(function() {
 
-  var sassPromise = new bluebird(function(resolve, reject) {
-    sass.render({
-      file: './sass/main.sass',
-      success: function(results) {
-        fs.writeFileAsync('./results/css/main.css', results.css)
-        .then(resolve);
-      },
-      error: reject
-    });
-  });
   return bluebird.all([
-    sassPromise,
-    db.getAllArticles().then(function(articles) {
-      if (articles) {
-        bluebird.map(articles, function(article) {
-          article.slug = slug(article.title);
-          return jade.renderFileAsync('./views/article.jade', {
-            author: config.author,
-            blogName: config.blogName,
-            article: article
-          }).then(function(html) {
-            return fs.writeFileAsync('./results/articles/' + article.slug + '.html', html);
-          });
-        });
-      }
-    }),
-    db.getFrontpage().then(function(frontpageArticles) {
-      frontpageArticles = frontpageArticles.map(function(article) {
-        article.slug = slug(article.title);
-        return article;
+    new bluebird(function(resolve, reject) {
+      sass.render({
+        file: './sass/main.sass',
+        success: function(results) {
+          fs.writeFileAsync('./results/css/main.css', results.css)
+          .then(resolve);
+        },
+        error: reject
       });
-      return jade.renderFileAsync('./views/index.jade', {
+    }),
+    bluebird.map(db.getAllArticles(), function(article) {
+      article.slug = slug(article.title);
+      return jade.renderFileAsync('./views/article.jade', {
         author: config.author,
         blogName: config.blogName,
-        articles: frontpageArticles
+        article: article
       }).then(function(html) {
-        return fs.writeFileAsync('./results/index.html', html);
+        return fs.writeFileAsync('./results/articles/' + article.slug + '.html', html);
       });
+    }),
+    jade.renderFileAsync('./views/index.jade', {
+      author: config.author,
+      blogName: config.blogName,
+      articles: db.getFrontpage().map(function(article) {
+        article.slug = slug(article.title);
+        return article;
+      })
+    }).then(function(html) {
+      return fs.writeFileAsync('./results/index.html', html);
     }),
     jade.renderFileAsync('./views/contact.jade', {
       author: config.author,

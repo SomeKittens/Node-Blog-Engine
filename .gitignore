@@ -1,4 +1,5 @@
 node_modules/*
+data.json
 config.json
 notes
 .sass-cache
