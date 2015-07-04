@@ -10,12 +10,14 @@ block content
         tr
           th id
           th Title
+          th Published
       tbody
         tr(
           ng-repeat='article in AC.articles'
         )
           td {{ article.id }}
           td {{ article.title || '(none)' }}
+          td {{ article.published ? 'Yes' : 'No' }}
           td
             a(ng-href='/edit/{{article.id}}') Edit
     form(
