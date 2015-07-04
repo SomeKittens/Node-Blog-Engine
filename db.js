@@ -1,3 +1,13 @@
+'use strict';
+
+/**
+ * article schema:
+ *   id: int
+ *   title: string
+ *   body: string
+ *   published: bool
+ */
+
 var data = require('./data.json');
 
 var fs = require('fs');
@@ -10,14 +20,19 @@ var save = function () {
   });
 };
 
+var isPub = function (article) {
+  return article.published;
+};
+
 module.exports = {
-  getAllArticles: function () {
-    return data.articles.filter(function (article) {
-      return article.deleted !== false;
-    });
-  },
   getArticle: function (id) {
     return data.articles[id];
+  },
+  getAllArticles: function () {
+    return data.articles.filter(isPub);
+  },
+  getFrontpage: function () {
+    return data.articles.filter(isPub).slice(-10);
   },
   saveArticle: function(patch) {
     data.articles[patch.id].title = patch.title;

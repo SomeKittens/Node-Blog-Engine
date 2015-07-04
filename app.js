@@ -24,11 +24,23 @@ app.locals.blogName = config.blogName;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+/**
+ * Public contains the JS, etc for the edit panel\
+ * /lib/*.js
+ */
 app.use(express.static(path.join(__dirname, 'public')));
+/**
+ * Results is the compiled app
+ * /
+ * /articles/*.html
+ */
+app.use(express.static(path.join(__dirname, 'results')));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+// TODO: remove Redis dep
 app.use(session({
   store: new RedisStore(process.env.REDIS_URL),
   secret: process.env.SESSION_SECRET
