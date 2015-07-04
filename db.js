@@ -34,6 +34,20 @@ module.exports = {
   getFrontpage: function () {
     return data.articles.filter(isPub).slice(-10);
   },
+  publish: function (id, publishState) {
+    var article = data.articles[parseInt(id, 10)];
+    if (!publishState) {
+      return article.published = false;
+    }
+    // Special-case to check title/body
+    if (!article.title) {
+      throw new Error('Cannot publish article without title');
+    }
+    if (!article.body) {
+      throw new Error('Cannot publish article without content');
+    }
+    article.published = true;
+  },
   saveArticle: function(patch) {
     data.articles[patch.id].title = patch.title;
     data.articles[patch.id].body = patch.body;

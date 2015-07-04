@@ -18,6 +18,14 @@ router.route('/:id')
   return res.json(db.getArticle(req.params.id));
 })
 .patch(function (req, res) {
+  if (req.body.publishState !== undefined) {
+    try {
+      db.publish(req.params.id, req.body.publishState);
+    } catch (e) {
+      return res.send(400, e.message);
+    }
+    return res.send(204);
+  }
   db.saveArticle(req.body);
   return res.send(204);
 });

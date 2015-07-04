@@ -29,6 +29,10 @@ angular.module('nbe', [
       // TODO indicate successful save
     });
   };
+
+  EC.togglePublish = function () {
+    articles.publish(EC.article.id, EC.article.published);
+  };
 })
 .controller('ArticlesController', function (articles) {
   var AC = this;
@@ -46,6 +50,15 @@ angular.module('nbe', [
     },
     getArticle: function (id) {
       return $http.get('/posts/' + id);
+    },
+    publish: function (id, publishState) {
+      return $http({
+        method: 'patch',
+        url: '/posts/' + id,
+        data: {
+          publishState: publishState
+        }
+      });
     },
     save: function (article) {
       return $http({
