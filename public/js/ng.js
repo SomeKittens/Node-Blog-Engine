@@ -2,20 +2,46 @@
 
 angular.module('nbe', [
   'commonality',
-  'hc.marked'
+  'hc.marked',
+  'ui.router'
 ])
-.config(['$httpProvider', function($httpProvider) {
+.config(function($httpProvider) {
   // Oddly, not the default, and is needed to tell express it's XHR
   $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-}])
-.controller('Editor', function($scope, $window, articles, commonalityCalc) {
+})
+.config(function($stateProvider, $locationProvider) {
+  $locationProvider.html5Mode({
+    enabled: true
+  });
+  // TODO resolves
+  $stateProvider
+  .state('articleList', {
+    url: '/edit',
+    templateUrl: '/templates/articleList',
+    controller: 'ArticlesController',
+    controllerAs: 'AC',
+    resolve: {
+      articles: function (articleManager) {
+        return articleManager.getAllArticles();
+      }
+    }
+  })
+  .state('edit', {
+    url: '/edit/{id:int}',
+    templateUrl: '/templates/edit',
+    controller: 'Editor',
+    controllerAs: 'EC',
+    resolve: {
+      article: function (articleManager, $stateParams) {
+        return articleManager.getArticle($stateParams.id);
+      }
+    }
+  });
+})
+.controller('Editor', function($scope, $window, article, articleManager, commonalityCalc) {
   var EC = this;
 
-  // TODO: ui-router
-  articles.getArticle($window.location.pathname.split('/')[2])
-  .then(function (data) {
-    EC.article = data.data;
-  });
+  EC.article = article;
 
   $scope.$watch('EC.article.body', function(n) {
     if (!n) { return; }
@@ -24,32 +50,30 @@ angular.module('nbe', [
   });
 
   EC.save = function() {
-    articles.save(EC.article)
+    articleManager.save(EC.article)
     .success(function() {
       // TODO indicate successful save
     });
   };
 
   EC.togglePublish = function () {
-    articles.publish(EC.article.id, EC.article.published);
+    articleManager.publish(EC.article.id, EC.article.published);
   };
 })
 .controller('ArticlesController', function (articles) {
   var AC = this;
-
-  articles.getAllArticles()
-  .then(function (data) {
-    AC.articles = data.data;
-  });
-
+  AC.articles = articles;
 })
-.factory('articles', function ($http) {
+.factory('articleManager', function ($http) {
+  var d = function (data) { return data.data };
   var actions = {
     getAllArticles: function () {
-      return $http.get('/posts');
+      return $http.get('/posts')
+      .then(d);
     },
     getArticle: function (id) {
-      return $http.get('/posts/' + id);
+      return $http.get('/posts/' + id)
+      .then(d);
     },
     publish: function (id, publishState) {
       return $http({

@@ -1,0 +1,40 @@
+.container
+  h1 Edit Article
+  .content.row
+    .six.columns
+      input.form-control.u-full-width(
+        type='text'
+        placeholder='Title'
+        ng-model='EC.article.title'
+      )
+      textarea.form-control.u-full-width(
+        placeholder='Body'
+        ng-model='EC.article.body'
+      )
+      label(
+        for='published'
+      ) Published: 
+        input#published.form-control(
+          ng-model='EC.article.published'
+          ng-click='EC.togglePublish()'
+          type='checkbox'
+        )
+      hr
+      .row
+        .six.columns
+          // Word commonality
+          table.table
+            thead
+              td Word
+              td Uses
+            tbody#commonality(commonality-results)
+        .six.columns
+          h4 Word Count
+          span
+            | {{ EC.wordCount | number }}
+      hr
+      .row
+        button.btn.btn-success.pull-right(ng-click='EC.save()') Save
+    .six.columns
+      h3 {{ EC.article.title }}
+      div(marked='EC.article.body')

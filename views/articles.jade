@@ -1,27 +1,4 @@
 extends layout
 
 block content
-  .container(
-    ng-controller='ArticlesController as AC'
-  )
-    h1 list of articles
-    table.u-full-width
-      thead
-        tr
-          th id
-          th Title
-          th Published
-      tbody
-        tr(
-          ng-repeat='article in AC.articles'
-        )
-          td {{ article.id }}
-          td {{ article.title || '(none)' }}
-          td {{ article.published ? 'Yes' : 'No' }}
-          td
-            a(ng-href='/edit/{{article.id}}') Edit
-    form(
-      action = '/posts'
-      method = 'post'
-    )
-      button.button-primary(type = 'submit') Create new article
+  include ./templates/articles-tpl.jade

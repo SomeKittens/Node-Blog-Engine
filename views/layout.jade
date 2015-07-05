@@ -11,6 +11,10 @@ html(ng-app='nbe')
     link(rel='stylesheet' media='screen' href='http://openfontlibrary.org/face/freeuniversal' type='text/css')
     link(rel='stylesheet', href='/css/main.css')
     link(rel='shortcut icon', href='/images/rk.jpg', type='image/x-icon')
+
+    base(
+      href='/'
+    )
   body
     header
       .title
@@ -41,12 +45,13 @@ html(ng-app='nbe')
 
       ga('create', 'UA-59570836-1', 'auto');
       ga('send', 'pageview');
-    // Libraries
-    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js')
-    //- script(src='/lib/angular-route.js')
-    script(src='/lib/ngCommonality.js')
-    script(src='/lib/marked.js')
-    script(src='/lib/angular-marked.js')
-    //- script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js')
-    // NBE code
-    script(src='/js/ng.js')
+    if isLocal
+      // Libraries
+      script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js')
+      script(src='/lib/ngCommonality.js')
+      script(src='/lib/marked.js')
+      script(src='/lib/angular-marked.js')
+      //- script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js')
+      // NBE code
+      script(src='/js/ng.js')
