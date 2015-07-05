@@ -36,7 +36,7 @@ rimraf('./results').then(function() {
         error: reject
       });
     }),
-    bluebird.map(db.getAllArticles(), function(article) {
+    bluebird.map(db.getPublishedArticles(), function(article) {
       article.slug = slug(article.title);
       return jade.renderFileAsync('./views/article.jade', {
         author: config.author,

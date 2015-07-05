@@ -29,6 +29,9 @@ module.exports = {
     return data.articles[id];
   },
   getAllArticles: function () {
+    return data.articles;
+  },
+  getPublishedArticles: function () {
     return data.articles.filter(isPub);
   },
   getFrontpage: function () {
