@@ -41,6 +41,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 // TODO: remove Redis dep
+// https://www.npmjs.com/package/session-file-store
 app.use(session({
   store: new RedisStore(process.env.REDIS_URL),
   secret: process.env.SESSION_SECRET
