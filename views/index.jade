@@ -5,5 +5,5 @@ block content
     for article in articles
       h3.heading
         a(href='/articles/#{article.slug}.html')= article.title
-      div!= article.body
+      div!= article.html
       hr

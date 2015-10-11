@@ -13,7 +13,7 @@ var db = require('./db');
 // Generate stuff
 //  - Jade
 //  - SASS (weird syntax, can't be promisified automagically)
-var sass = require('node-sass');
+var sass = bluebird.promisifyAll(require('node-sass'));
 var jade = bluebird.promisifyAll(require('jade'));
 
 rimraf('./results').then(function() {
@@ -27,19 +27,14 @@ rimraf('./results').then(function() {
 }).then(function() {
 
   return bluebird.all([
-    new bluebird(function(resolve, reject) {
-      sass.render({
-        file: './sass/main.sass',
-        success: function(results) {
-          fs.writeFileAsync('./results/css/main.css', results.css)
-          .then(resolve);
-        },
-        error: reject
-      });
+    sass.renderAsync({
+      file: './sass/main.sass'
+    }).then(function (results) {
+      return fs.writeFileAsync('./results/css/main.css', results.css)
     }),
     bluebird.map(db.getPublishedArticles(), function(article) {
       article.slug = slug(article.title);
-      article.body = marked(article.body);
+      article.html = marked(article.body);
       console.log('rendering', article.title);
       return jade.renderFileAsync('./views/article.jade', {
         author: config.author,
@@ -54,7 +49,7 @@ rimraf('./results').then(function() {
       blogName: config.blogName,
       articles: db.getFrontpage().map(function(article) {
         article.slug = slug(article.title);
-        article.body = marked(article.body);
+        article.html = marked(article.body);
         return article;
       })
     }).then(function(html) {
@@ -68,4 +63,8 @@ rimraf('./results').then(function() {
     }),
     fs.copyAsync('./public/images', './results/images')
   ]);
-}).tap(process.exit);
+})
+.tap(function () {
+  console.log('Site generation completed');
+  process.exit();
+});
