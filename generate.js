@@ -37,7 +37,7 @@ rimraf('./results').then(function() {
         error: reject
       });
     }),
-    bluebird.map(db.getPublishedArticles().reverse, function(article) {
+    bluebird.map(db.getPublishedArticles(), function(article) {
       article.slug = slug(article.title);
       article.body = marked(article.body);
       console.log('rendering', article.title);
