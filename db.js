@@ -54,6 +54,9 @@ module.exports = {
   saveArticle: function(patch) {
     data.articles[patch.id].title = patch.title;
     data.articles[patch.id].body = patch.body;
+
+    module.exports.publish(patch.id, patch.published);
+
     save();
   },
   createArticle: function () {
