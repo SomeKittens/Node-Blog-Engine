@@ -35,7 +35,7 @@ module.exports = {
     return data.articles.filter(isPub);
   },
   getFrontpage: function () {
-    return data.articles.filter(isPub).slice(-10);
+    return data.articles.filter(isPub).slice(-10).reverse();
   },
   publish: function (id, publishState) {
     var article = data.articles[parseInt(id, 10)];
