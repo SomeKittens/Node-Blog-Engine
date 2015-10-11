@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 /**
- * Public contains the JS, etc for the edit panel\
+ * Public contains the JS, etc for the edit panel
  * /lib/*.js
  */
 app.use(express.static(path.join(__dirname, 'public')));

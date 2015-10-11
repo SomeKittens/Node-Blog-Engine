@@ -13,7 +13,7 @@ angular.module('nbe', [
   $locationProvider.html5Mode({
     enabled: true
   });
-  // TODO resolves
+
   $stateProvider
   .state('articleList', {
     url: '/edit',
@@ -49,6 +49,11 @@ angular.module('nbe', [
     EC.wordCount = n.split(' ').filter(Boolean).length;
   });
 
+  $scope.$watch('EC.article.published', function (n, o) {
+    if (n === o) { return; }
+    articleManager.publish(EC.article.id, EC.article.published);
+  });
+
   EC.save = function() {
     articleManager.save(EC.article)
     .success(function() {
@@ -56,9 +61,6 @@ angular.module('nbe', [
     });
   };
 
-  EC.togglePublish = function () {
-    articleManager.publish(EC.article.id, EC.article.published);
-  };
 })
 .controller('ArticlesController', function (articles) {
   var AC = this;
