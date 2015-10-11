@@ -10,7 +10,6 @@
     "url": "https://github.com/SomeKittens/Node-Blog-Engine"
   },
   "dependencies": {
-    "bcrypt": "^0.8.0",
     "bluebird": "^2.3.11",
     "body-parser": "~1.0.0",
     "connect-redis": "2.0.0",
@@ -25,7 +24,7 @@
     "marked": "^0.3.2",
     "morgan": "~1.0.0",
     "nbe-postgres": "^0.2.0",
-    "node-sass": "^2.1.1",
+    "node-sass": "^3.3.3",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
     "req-is": "^0.1.0",
