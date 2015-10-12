@@ -39,7 +39,8 @@ rimraf('./results').then(function() {
       return jade.renderFileAsync('./views/article.jade', {
         author: config.author,
         blogName: config.blogName,
-        article: article
+        article: article,
+        pretty: true
       }).then(function(html) {
         return fs.writeFileAsync('./results/articles/' + article.slug + '.html', html);
       });
@@ -51,13 +52,15 @@ rimraf('./results').then(function() {
         article.slug = slug(article.title);
         article.html = marked(article.body);
         return article;
-      })
+      }),
+      pretty: true
     }).then(function(html) {
       return fs.writeFileAsync('./results/index.html', html);
     }),
     jade.renderFileAsync('./views/contact.jade', {
       author: config.author,
-      blogName: config.blogName
+      blogName: config.blogName,
+      pretty: true
     }).then(function(html) {
       return fs.writeFileAsync('./results/contact.html', html);
     }),
