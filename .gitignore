@@ -6,3 +6,4 @@ notes
 npm-debug.log
 results
 .env
+.DS_Store
