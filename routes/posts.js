@@ -1,6 +1,7 @@
 var express = require('express')
   , db = require('../db')
-  , router = express.Router();
+  , router = express.Router()
+  , generate = require('../generate');
 
 // API for interacting with posts
 
@@ -8,16 +9,22 @@ router.route('/')
 .get(function(req, res) {
   return res.json(db.getAllArticles());
 })
-.post(function(req, res) {
+.post(function(req, res, next) {
   var id = db.createArticle();
-  return res.redirect('/edit/' + id);
+  generate()
+  .then(function () {
+    return res.redirect('/edit/' + id);
+  })
+  .catch(function (err) {
+    next(err);
+  });
 });
 
 router.route('/:id')
 .get(function (req, res) {
   return res.json(db.getArticle(req.params.id));
 })
-.patch(function (req, res) {
+.patch(function (req, res, next) {
   if (req.body.publishState !== undefined) {
     try {
       db.publish(req.params.id, req.body.publishState);
@@ -27,7 +34,13 @@ router.route('/:id')
     return res.send(204);
   }
   db.saveArticle(req.body);
-  return res.send(204);
+  generate()
+  .then(function () {
+    return res.send(204);
+  })
+  .catch(function (err) {
+    next(err);
+  });
 });
 
 module.exports = router;
