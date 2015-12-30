@@ -24,7 +24,8 @@ function generate() {
     return bluebird.all([
       fs.mkdirAsync('./results/css'),
       fs.mkdirAsync('./results/articles'),
-      fs.mkdirAsync('./results/images')
+      fs.mkdirAsync('./results/images'),
+      fs.mkdirAsync('./results/talks')
     ]);
   }).then(function() {
 
