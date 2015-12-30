@@ -66,6 +66,13 @@ function generate() {
       }).then(function(html) {
         return fs.writeFileAsync('./results/contact.html', html);
       }),
+      jade.renderFileAsync('./views/talks.jade', {
+        author: config.author,
+        blogName: config.blogName,
+        pretty: true
+      }).then(function(html) {
+        return fs.writeFileAsync('./results/talks/index.html', html);
+      }),
       fs.copyAsync('./public/images', './results/images')
     ]);
   })

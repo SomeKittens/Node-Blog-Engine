@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  .container.talks
+    .row.talk
+      .row
+        h3.twelve.columns Five Angular Optimizations in Five Minutes
+      .row
+        .center-video
+          iframe(
+            type='text/html'
+            width='640'
+            height='390'
+            src='https://www.youtube.com/embed/qRQ0iSlo1Lk?origin=http://rkoutnik.com'
+            frameborder='0'
+          )
+    .row.talk
+      .row
+        h3.twelve.columns Optimization Killers: Finding (And Fixing) The Hidden Glue Bugs in Angular
+      .row
+        .center-video
+          iframe(
+            type='text/html'
+            width='640'
+            height='390'
+            src='https://www.youtube.com/embed/uS7iHR6topY?t=2m28s&origin=http://rkoutnik.com'
+            frameborder='0'
+          )
+    .row.talk
+      .row
+        h3.twelve.columns What are Observables and why should I care?  (slides)
+      .row
+        .center-video
+          a(
+            href='/talks/observables'
+          )
+            img(
+              src='/images/obs.png'
+            )

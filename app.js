@@ -50,6 +50,7 @@ app.use(flash());
 
 app.use('/', pages);
 app.use('/posts', posts);
+app.use('/talks', (req, res) => res.render('talks'));
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
