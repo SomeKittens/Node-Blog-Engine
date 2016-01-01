@@ -3,7 +3,9 @@
   "version": "0.2.0",
   "scripts": {
     "start": "DEBUG=nbe NODE_ENV=development nodemon ./bin/www",
-    "generate": "node generate.js"
+    "generate": "node generate.js",
+    "cp": "cp -r results/* ../../blawg",
+    "build": "npm run generate && npm run cp"
   },
   "repository": {
     "type": "git",

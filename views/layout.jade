@@ -19,7 +19,7 @@ html(ng-app='nbe')
       .title
         .middle-title
           .inner-title
-            h1= author
+            h1.author= author
             nav
               ul
                 li
@@ -31,7 +31,17 @@ html(ng-app='nbe')
                 li
                   a(href='//github.com/SomeKittens')
                     span GitHub
-    block content
+    .container
+      block content
+      .sidebar
+        h4.sidetitle Recent Articles
+        for article in recentArticles
+          div.recent
+            a(href='/articles/#{article.slug}.html')= article.title
+      .sidebar
+        | Ohai, nerds.  TWITTER
+      .sidebar
+        | Sign up for my sweet-iz mailing list
 
     footer
       | &copy; 2015 Randall Koutnik | 

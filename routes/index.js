@@ -5,7 +5,7 @@ var db = require('../db');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  db.getFrontpage().then(function(articles) {
+  db.getRecent().then(function(articles) {
     return res.render('index', {
       articles: articles || {}
     });

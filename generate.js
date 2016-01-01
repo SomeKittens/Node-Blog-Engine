@@ -16,6 +16,7 @@ var db = require('./db');
 var sass = bluebird.promisifyAll(require('node-sass'));
 var jade = bluebird.promisifyAll(require('jade'));
 
+var sidebarArticles = db.getRecent(4);
 
 function generate() {
   return rimraf('./results').then(function() {
@@ -43,6 +44,7 @@ function generate() {
           author: config.author,
           blogName: config.blogName,
           article: article,
+          recentArticles: sidebarArticles,
           pretty: true
         }).then(function(html) {
           return fs.writeFileAsync('./results/articles/' + article.slug + '.html', html);
@@ -51,11 +53,12 @@ function generate() {
       jade.renderFileAsync('./views/index.jade', {
         author: config.author,
         blogName: config.blogName,
-        articles: db.getFrontpage().map(function(article) {
+        articles: db.getRecent().map(function(article) {
           article.slug = slug(article.title);
           article.html = marked(article.body);
           return article;
         }),
+        recentArticles: sidebarArticles,
         pretty: true
       }).then(function(html) {
         return fs.writeFileAsync('./results/index.html', html);
@@ -63,6 +66,7 @@ function generate() {
       jade.renderFileAsync('./views/contact.jade', {
         author: config.author,
         blogName: config.blogName,
+        recentArticles: sidebarArticles,
         pretty: true
       }).then(function(html) {
         return fs.writeFileAsync('./results/contact.html', html);
@@ -70,6 +74,7 @@ function generate() {
       jade.renderFileAsync('./views/talks.jade', {
         author: config.author,
         blogName: config.blogName,
+        recentArticles: sidebarArticles,
         pretty: true
       }).then(function(html) {
         return fs.writeFileAsync('./results/talks/index.html', html);
