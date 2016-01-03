@@ -79,7 +79,8 @@ function generate() {
       }).then(function(html) {
         return fs.writeFileAsync('./results/talks/index.html', html);
       }),
-      fs.copyAsync('./public/images', './results/images')
+      fs.copyAsync('./public/images', './results/images'),
+      fs.copyAsync('./public/talks', './results/talks')
     ]);
   })
   .tap(function () {
