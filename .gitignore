@@ -1,9 +1,14 @@
-node_modules/*
+# My stuff
 data.json
 config.json
 notes
+.env
+
+# Generated
+node_modules/*
 .sass-cache
 npm-debug.log
-results
-.env
 .DS_Store
+
+# Output of NBE
+results
