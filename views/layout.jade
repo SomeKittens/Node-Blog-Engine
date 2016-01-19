@@ -51,27 +51,28 @@ html(ng-app='nbe')
                     span GitHub
     .container
       block content
-      .sidebar
-        h4.sidetitle Recent Articles
-        if recentArticles
-          for article in recentArticles
-            div.recent
-              a(href='/articles/#{article.slug}.html')= article.title
-      .sidebar.signup
-        h4.sidetitle Get Updates
-        form(
-          action='https://tinyletter.com/rkoutnik'
-          method='post'
-          target='popupwindow'
-          onsubmit='window.open(\'https://tinyletter.com/rkoutnik\', \'popupwindow\', \'scrollbars=yes,width=800,height=600\');return true'
-        )
-          input.email(
-            type='text'
-            name='email'
-            placeholder='Email'
+      .sidebar-wrapper
+        .sidebar
+          h4.sidetitle Recent Articles
+          if recentArticles
+            for article in recentArticles
+              div.recent
+                a(href='/articles/#{article.slug}.html')= article.title
+        .sidebar.signup
+          h4.sidetitle Get Updates
+          form(
+            action='https://tinyletter.com/rkoutnik'
+            method='post'
+            target='popupwindow'
+            onsubmit='window.open(\'https://tinyletter.com/rkoutnik\', \'popupwindow\', \'scrollbars=yes,width=800,height=600\');return true'
           )
-          input(type='hidden' value='1' name='embed')
-          input.sub(type='submit' value='Subscribe')
+            input.email(
+              type='text'
+              name='email'
+              placeholder='Email'
+            )
+            input(type='hidden' value='1' name='embed')
+            input.sub(type='submit' value='Subscribe')
 
       //- TODO: http://jasonmayes.com/projects/twitterApi/#sthash.wurVTi0r.dpbs
       //- .sidebar
