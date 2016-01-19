@@ -5,11 +5,29 @@ html(ng-app='nbe')
     block vars
     - var title = titleOverwrite ? titleOverwrite : blogName;
     title= title
+
+    //- CSS & style stuffs
     link(rel='stylesheet' media='screen' href='//fontlibrary.org/face/grupo3' type='text/css')
     link(rel='stylesheet' media='screen' href='//fontlibrary.org/face/selena' type='text/css')
     link(rel='stylesheet' media='screen' href='//fontlibrary.org/face/freeuniversal' type='text/css')
     link(rel='stylesheet', href='/css/main.css')
     link(rel='shortcut icon', href='/images/rk.jpg', type='image/x-icon')
+
+    //- SEO things?
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(name='copyright', content='rkoutnik.com is copyright Randall Koutnik, 2016')
+    meta(name='description', content='Articles about tech from Randall Koutnik')
+    meta(name='robots', content='index/follow')
+
+    meta(property='og:title', content='#{title}')
+    meta(property='og:image', content='/images/rk.jpg')
+    meta(property='og:site_name', content='Randall Koutnik')
+    //- meta(property='og:url', content='')
+    //- meta(property='og:description', content='')
+    meta(property='og:type', content='article')
+    meta(property='og:locale', content='en_US')
+    meta(property='article:author', content='https://www.facebook.com/randall.koutnik')
+    //- meta(property='article:publisher', content='https://www.facebook.com/randall.koutnik')
 
     base(
       href='/'
