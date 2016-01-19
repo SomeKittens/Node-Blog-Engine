@@ -35,9 +35,10 @@ html(ng-app='nbe')
       block content
       .sidebar
         h4.sidetitle Recent Articles
-        for article in recentArticles
-          div.recent
-            a(href='/articles/#{article.slug}.html')= article.title
+        if recentArticles
+          for article in recentArticles
+            div.recent
+              a(href='/articles/#{article.slug}.html')= article.title
       .sidebar.signup
         h4.sidetitle Get Updates
         form(
