@@ -29,6 +29,7 @@ function generate() {
       fs.mkdirAsync('./results/talks')
     ]);
   }).then(function() {
+    let publishedArticles = db.getPublishedArticles();
 
     return bluebird.all([
       sass.renderAsync({
@@ -36,17 +37,19 @@ function generate() {
       }).then(function (results) {
         return fs.writeFileAsync('./results/css/main.css', results.css)
       }),
-      bluebird.map(db.getPublishedArticles(), function(article) {
+      bluebird.map(publishedArticles, function(article, idx) {
         article.slug = slug(article.title);
         article.html = marked(article.body);
-        console.log('rendering', article.title);
         return jade.renderFileAsync('./views/article.jade', {
           author: config.author,
           blogName: config.blogName,
           article: article,
           recentArticles: sidebarArticles,
+          next: publishedArticles[idx + 1],
+          past: publishedArticles[idx - 1],
           pretty: true
         }).then(function(html) {
+          console.log('rendered', article.title);
           return fs.writeFileAsync('./results/articles/' + article.slug + '.html', html);
         });
       }),

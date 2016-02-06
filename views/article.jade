@@ -5,6 +5,16 @@ block content
     h1.heading= article.title
     div.article!= article.html
     hr
+    .nextLast
+      .end-link
+        if past
+            div Previously...
+            a(href='/articles/#{past.slug}.html') &lt;&lt; #{past.title}
+      .end-link
+        if next
+            div Next up:
+            a(href='/articles/#{next.slug}.html') #{next.title} &gt;&gt;
+    hr
     .share-pl0x
       div If you liked this article, please share it!
         span.tweet-ask
